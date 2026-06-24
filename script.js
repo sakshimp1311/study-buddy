@@ -36,56 +36,39 @@ document.getElementById('userInput').addEventListener('input', () => {
 async function askAI() {
 
   // Get API key from input box
-  const API_KEY = document.getElementById('apiKeyInput').value.trim();
-  if (!API_KEY) {
-    alert("Please enter your Groq API key first!\n\nGet it FREE from: console.groq.com\n\nSteps:\n1. Go to console.groq.com\n2. Sign up with Google\n3. Click API Keys → Create API Key\n4. Copy and paste here!");
+  var API_KEY = document.getElementById('apiKeyInput').value.trim();
+  
+  if (!API_KEY || API_KEY === "") {
+    alert("Please enter your Groq API key first!\n\nGet it FREE from: console.groq.com");
     return;
   }
 
   // Save key in browser for next time
   localStorage.setItem('study_buddy_key', API_KEY);
 
-  const input = document.getElementById('userInput').value.trim();
+  var input = document.getElementById('userInput').value.trim();
   if (!input || input.length < 10) {
     alert("Please type something first! Minimum 10 characters required.");
     return;
   }
 
-  const prompts = {
-    explain: `You are a friendly study buddy. Explain this topic in very simple, easy-to-understand language with examples. Use bullet points and emojis to make it engaging and fun to read:
-
-Topic: ${input}`,
-
-    summarize: `Summarize these notes into clear, concise key points. Use bullet points. Make it easy to revise quickly:
-
-Notes: ${input}`,
-
-    quiz: `Create 5 multiple choice questions (MCQs) based on this topic.
-Format each as:
-Q1. [Question]
-A) Option  B) Option  C) Option  D) Option
-✅ Answer: [correct option with brief explanation]
-
-Topic: ${input}`,
-
-    flashcard: `Create 8 flashcards for studying this topic.
-Format each as:
-🃏 Q: [question or concept]
-   A: [clear, concise answer]
-
-Topic: ${input}`
+  var prompts = {
+    explain: "You are a friendly study buddy. Explain this topic in very simple, easy-to-understand language with examples. Use bullet points and emojis:\n\nTopic: " + input,
+    summarize: "Summarize these notes into clear, concise key points. Use bullet points:\n\nNotes: " + input,
+    quiz: "Create 5 multiple choice questions (MCQs) based on this topic.\nFormat:\nQ1. [Question]\nA) Option  B) Option  C) Option  D) Option\n✅ Answer: [correct option]\n\nTopic: " + input,
+    flashcard: "Create 8 flashcards for studying this topic.\nFormat:\n🃏 Q: [question]\n   A: [answer]\n\nTopic: " + input
   };
 
-  const titles = {
+  var titles = {
     explain:   "💡 Explanation",
     summarize: "📝 Summary",
     quiz:      "🧠 Practice Quiz",
     flashcard: "🃏 Flashcards"
   };
 
-  const btn = document.getElementById('askBtn');
-  const outputCard = document.getElementById('outputCard');
-  const outputContent = document.getElementById('outputContent');
+  var btn = document.getElementById('askBtn');
+  var outputCard = document.getElementById('outputCard');
+  var outputContent = document.getElementById('outputContent');
 
   btn.disabled = true;
   btn.textContent = "✨ Generating...";
@@ -94,13 +77,13 @@ Topic: ${input}`
   outputContent.innerHTML = '<div class="loading-pulse">🤖 AI is thinking...</div>';
 
   try {
-    const response = await fetch(
+    var response = await fetch(
       "https://api.groq.com/openai/v1/chat/completions",
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${API_KEY}`
+          "Authorization": "Bearer " + API_KEY
         },
         body: JSON.stringify({
           model: "llama-3.3-70b-versatile",
@@ -119,7 +102,7 @@ Topic: ${input}`
       }
     );
 
-    const data = await response.json();
+    var data = await response.json();
 
     if (data.choices && data.choices[0]) {
       outputContent.textContent = data.choices[0].message.content;
@@ -137,17 +120,17 @@ Topic: ${input}`
 
 // ─── Copy Output ─────────────────────────────────────────
 function copyOutput() {
-  const text = document.getElementById('outputContent').textContent;
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.querySelector('.copy-btn');
+  var text = document.getElementById('outputContent').textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = document.querySelector('.copy-btn');
     btn.textContent = "✅ Copied!";
-    setTimeout(() => btn.textContent = "📋 Copy", 2000);
+    setTimeout(function() { btn.textContent = "📋 Copy"; }, 2000);
   });
 }
 
 // ─── Load Saved API Key ───────────────────────────────────
-window.onload = () => {
-  const savedKey = localStorage.getItem('study_buddy_key');
+window.onload = function() {
+  var savedKey = localStorage.getItem('study_buddy_key');
   if (savedKey) {
     document.getElementById('apiKeyInput').value = savedKey;
   }
