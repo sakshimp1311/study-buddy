@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Study Buddy</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <div class="logo">📚 AI Study Buddy</div>
+    <p class="tagline">Ask anything — Get explanations, summaries, quizzes & flashcards!</p>
+  </div>
+
+  <div class="card mode-card">
+    <div class="mode-buttons">
+      <button class="mode-btn active" id="btn-explain" onclick="setMode('explain')">💡 Explain Topic</button>
+      <button class="mode-btn" id="btn-summarize" onclick="setMode('summarize')">📝 Summarize Notes</button>
+      <button class="mode-btn" id="btn-quiz" onclick="setMode('quiz')">🧠 Generate Quiz</button>
+      <button class="mode-btn" id="btn-flashcard" onclick="setMode('flashcard')">🃏 Flashcards</button>
+    </div>
+  </div>
+
+  <div class="card input-card">
+    <label id="inputLabel">💡 Enter topic you want explained:</label>
+    <textarea id="userInput" placeholder="Type your topic here... (e.g. Photosynthesis, Newton's Laws, World War 2)"></textarea>
+    <div class="word-count" id="wordCount">0 characters</div>
+    <button id="askBtn" onclick="askAI()">✨ Ask AI</button>
+  </div>
+
+  <div id="outputCard" class="card output-card hidden">
+    <div class="output-header">
+      <h3 id="outputTitle">💡 Explanation</h3>
+      <button class="copy-btn" onclick="copyOutput()">📋 Copy</button>
+    </div>
+    <div id="outputContent"></div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
