@@ -15,6 +15,35 @@
     <p class="tagline">Ask anything — Get explanations, summaries, quizzes & flashcards!</p>
   </div>
 
+  <!-- API Key Input Box -->
+  <div class="card" style="margin-bottom:20px;">
+    <label style="color:#60a5fa; font-size:0.9rem; font-weight:600; display:block; margin-bottom:8px;">
+      🔑 Enter Your Groq API Key:
+    </label>
+    <input
+      type="password"
+      id="apiKeyInput"
+      placeholder="gsk_xxxxxxxxxxxxxxxx"
+      style="width:100%; padding:12px; background:rgba(0,0,0,0.3); border:1.5px solid rgba(255,255,255,0.1); border-radius:10px; color:#e2e8f0; font-size:0.95rem; outline:none;"
+    />
+    <small style="color:#64748b; margin-top:6px; display:block;">
+      🆓 Get your free API key at: console.groq.com
+    </small>
+    <div style="background:rgba(96,165,250,0.1); border:1px solid rgba(96,165,250,0.3); border-radius:10px; padding:12px; margin-top:10px;">
+      <p style="color:#60a5fa; font-size:0.85rem; font-weight:600; margin-bottom:6px;">
+        📖 How to get your FREE API Key:
+      </p>
+      <ol style="color:#94a3b8; font-size:0.82rem; padding-left:16px; line-height:1.8;">
+        <li>Go to <strong style="color:#e2e8f0;">console.groq.com</strong></li>
+        <li>Sign up with Google account</li>
+        <li>Click <strong style="color:#e2e8f0;">"API Keys"</strong> → <strong style="color:#e2e8f0;">"Create API Key"</strong></li>
+        <li>Copy key and paste above</li>
+        <li>Key starts with <strong style="color:#e2e8f0;">gsk_</strong></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Mode Selection -->
   <div class="card mode-card">
     <div class="mode-buttons">
       <button class="mode-btn active" id="btn-explain" onclick="setMode('explain')">💡 Explain Topic</button>
@@ -24,6 +53,7 @@
     </div>
   </div>
 
+  <!-- Input Section -->
   <div class="card input-card">
     <label id="inputLabel">💡 Enter topic you want explained:</label>
     <textarea id="userInput" placeholder="Type your topic here... (e.g. Photosynthesis, Newton's Laws, World War 2)"></textarea>
@@ -31,6 +61,7 @@
     <button id="askBtn" onclick="askAI()">✨ Ask AI</button>
   </div>
 
+  <!-- Output Section -->
   <div id="outputCard" class="card output-card hidden">
     <div class="output-header">
       <h3 id="outputTitle">💡 Explanation</h3>

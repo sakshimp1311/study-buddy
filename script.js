@@ -1,4 +1,5 @@
 // API key will be taken from input box - not stored in code!
+
 let currentMode = "explain";
 
 // ─── Mode Selection ──────────────────────────────────────
@@ -33,6 +34,17 @@ document.getElementById('userInput').addEventListener('input', () => {
 
 // ─── Ask AI (Groq API) ───────────────────────────────────
 async function askAI() {
+
+  // Get API key from input box
+  const API_KEY = document.getElementById('apiKeyInput').value.trim();
+  if (!API_KEY) {
+    alert("Please enter your Groq API key first!\n\nGet it FREE from: console.groq.com\n\nSteps:\n1. Go to console.groq.com\n2. Sign up with Google\n3. Click API Keys → Create API Key\n4. Copy and paste here!");
+    return;
+  }
+
+  // Save key in browser for next time
+  localStorage.setItem('study_buddy_key', API_KEY);
+
   const input = document.getElementById('userInput').value.trim();
   if (!input || input.length < 10) {
     alert("Please type something first! Minimum 10 characters required.");
@@ -131,4 +143,12 @@ function copyOutput() {
     btn.textContent = "✅ Copied!";
     setTimeout(() => btn.textContent = "📋 Copy", 2000);
   });
+}
+
+// ─── Load Saved API Key ───────────────────────────────────
+window.onload = () => {
+  const savedKey = localStorage.getItem('study_buddy_key');
+  if (savedKey) {
+    document.getElementById('apiKeyInput').value = savedKey;
+  }
 }
